@@ -118,8 +118,6 @@ def sendLinkTip(
         linkType=linkType
     )
 
-    print '--------------sendLinkTip-----------------'
-
     return _deliverTip(
         uid, funnel,
         notif_title=notif_title,
@@ -148,33 +146,27 @@ def _deliverTip(
     )
     notif = createNotif(notif_title, notif_text)
 
-    print '--------------DeliverTip-----------------'
-
     return sendTopicWithNotif(
         uid, topic, message, notif, tracking=notif_tracking
     )
 
-def testCSV():
-    print '-----------------testCSV-----------------'
-    # UID = '60d60626-fb6e-41c8-9c51-960bb10986f0'
-    UID = 'c79610ce-c60b-451b-bc07-0dda38280491'
-    savings = 500
-    airport_name = 'something'
-    # url = "https://hopperapp.herokuapp.com/?origin=%(origin)s&destination=%(destination)s&departure=%(departure_date)s&return=%(return_date)s" % {'origin':origin,'destination':destination,'departure_date':departure_date,'return_date':return_date}
-    # url = "https://timewarp.herokuapp.com/?origin=%(origin)s&destination=%(destination)s&departure=%(departure_date)s&return=%(return_date)s" % {'origin':origin,'destination':destination,'departure_date':departure_date,'return_date':return_date}
-    url = "https://timewarp.herokuapp.com/?origin=airport/YUL&destination=airport/LAS&departure=2017-05-12&return=2017-05-20"
-    notif_text = "Save $%(savings)s on your flight to %(airport_name)s. Grab this fare now before it goes back to the future!" % {'savings':savings,'airport_name':airport_name}
-    message_title = "Save $%(savings)s on your flight to %(airport_name)s. Grab this fare now before it goes back to the future!" % {'savings':savings,'airport_name':airport_name}
+def testCSV(user_ids):
 
-    return sendLinkTip(
-        UID,
-        url=url,
-        notif_title="Timewarp!",
-        notif_text=notif_text,
-        topic_title="Timewarp!",
-        message_title=message_title,
-        tip_tracking=dict(
-            campaign_campaignId='timewarp-bd-routes',
+    for user_id in user_ids:
+        UID = user_id
+        url = "https://hopperfacebook.herokuapp.com"
+        notif_text = "Check out our Timewarp deals for huge savings!"
+        message_title = "Check out our Timewarp deals for huge savings!"
+
+        return sendLinkTip(
+            UID,
+            url=url,
+            notif_title="Timewarp!",
+            notif_text=notif_text,
+            topic_title="Timewarp!",
+            message_title=message_title,
+            tip_tracking=dict(
+                campaign_campaignId='darkpool-facebook',
+            )
         )
-    )
 

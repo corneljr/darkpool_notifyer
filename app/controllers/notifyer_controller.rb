@@ -10,11 +10,11 @@ class NotifyerController < ApplicationController
 		users = JSON.parse(params[:users])
 		user_ids = []
 		users.each do |user|
-			user_ids << user["$properties"]["user_id"])
-			# send_notification(user["$properties"]["user_id"])
+			user_ids << user["$properties"]["user_id"]
 		end
+
+		updated_ids = update_ids_and_send(user_ids)
 		
 		render json: {'status':200}
 	end
 end
-`
